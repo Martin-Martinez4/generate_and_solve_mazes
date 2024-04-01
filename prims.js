@@ -1,8 +1,8 @@
 // grid of cells i,j
 // start all at false 
 // when placed in maze change to true
-const rows = 10;
-const cols = 10;
+const rows = 40;
+const cols = 40;
 
 const directions = {
     top: "top",
@@ -134,7 +134,6 @@ while (frontierArray.length > 0) {
         }
     }
     // get right
-    console.log(currentCell.row)
     if (currentCell.col < cols-1) {
         rightNeighbor = mazeGrid[row][col+1];
         if (!rightNeighbor.inFrontier && !rightNeighbor.inMaze) {
@@ -143,7 +142,6 @@ while (frontierArray.length > 0) {
             frontierArray.push(rightNeighbor);
         }
     }
-    console.log(currentCell.col)
     // get bottom
     if (currentCell.row < rows-1) {
         bottomNeighbor = mazeGrid[row+1][col];
@@ -163,24 +161,45 @@ while (frontierArray.length > 0) {
         }
     }
 
+    // randomize choosing of wall to delete
+    // put in array and shuffle array
+    let neighbors = [];
     if(topNeighbor?.inMaze){
+        neighbors.push(directions.top)
+    }
+    if(rightNeighbor?.inMaze){
+        neighbors.push(directions.right)
+    }
+    if(bottomNeighbor?.inMaze){
+        neighbors.push(directions.bottom)
+
+    }
+    if(leftNeighbor?.inMaze){
+        neighbors.push(directions.left)
+    }
+
+    // shuffle(neighbors);
+    let randomNeighborIndex = Math.floor(Math.random()*neighbors.length);
+    console.log(randomNeighborIndex)
+
+    // switch statment
+    if(neighbors[randomNeighborIndex] == directions.top){
         topNeighbor.walls.bottom = false;
         currentCell.walls.top = false;
-    }else if(rightNeighbor?.inMaze){
+    }else if(neighbors[randomNeighborIndex] == directions.right){
         rightNeighbor.walls.left = false;
         currentCell.walls.right = false;
 
-    }else if(bottomNeighbor?.inMaze){
+    }else if(neighbors[randomNeighborIndex] == directions.bottom){
         bottomNeighbor.walls.top = false;
         currentCell.walls.bottom = false;
 
-    }else if(leftNeighbor?.inMaze){
+    }else if(neighbors[randomNeighborIndex] == directions.left){
         leftNeighbor.walls.right = false;
         currentCell.walls.left = false;
-
     }
 
-    console.log(frontierArray)
+
 }
 
 console.log(mazeGrid)

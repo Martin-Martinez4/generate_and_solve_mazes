@@ -3,8 +3,8 @@
 // when placed in maze change to true
 
 // causes cooridors at lower values
-const rows = 30;
-const cols = 30;
+const rows = 50;
+const cols = 50;
 
 const directions = {
     top: "top",
@@ -69,7 +69,6 @@ function createPassage(rowIndex, colIndex, mazeGrid) {
 
     let walls = [directions.top, directions.right, directions.bottom, directions.left];
     shuffle(walls); 
-    
     let currentCell = mazeGrid[rowIndex][colIndex];
     for(let i = 0; i < walls.length; i++){
         
@@ -94,6 +93,7 @@ function createPassage(rowIndex, colIndex, mazeGrid) {
         if (dY < cols && dX < rows && dX >= 0 && dY >= 0 && !mazeGrid[dX][dY].visited) {
             currentCell.walls[currentWall] = false;
             currentCell.visited = true;
+            mazeGrid[dX][dY].visited = true;
             mazeGrid[dX][dY].walls[opposite[currentWall]] = false;
             console.count()
             createPassage(dX, dY, mazeGrid);
