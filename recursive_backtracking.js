@@ -2,6 +2,8 @@
 // start all at false 
 // when placed in maze change to true
 
+import { SolveMazeWeightedBFS } from "./weighted_BFS_solver.js";
+
 // causes cooridors at lower values
 const rows = 50;
 const cols = 50;
@@ -95,7 +97,6 @@ function createPassage(rowIndex, colIndex, mazeGrid) {
             currentCell.visited = true;
             mazeGrid[dX][dY].visited = true;
             mazeGrid[dX][dY].walls[opposite[currentWall]] = false;
-            console.count()
             createPassage(dX, dY, mazeGrid);
         }
     }
@@ -141,6 +142,8 @@ for (let i = 0; i < rows; i++) {
     maze.appendChild(row);
 
 }
+
+// SolveMazeWeightedBFS(rows, cols, mazeGrid);
 
 
 

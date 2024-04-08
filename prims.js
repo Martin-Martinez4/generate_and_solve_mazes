@@ -1,8 +1,10 @@
+import { SolveMazeWeightedBFS } from "./weighted_BFS_solver.js";
+
 // grid of cells i,j
 // start all at false 
 // when placed in maze change to true
-const rows = 40;
-const cols = 40;
+const rows = 20;
+const cols = 20;
 
 const directions = {
     top: "top",
@@ -60,6 +62,35 @@ function makeMazeGrid(rows, cols) {
 
 let mazeGrid = makeMazeGrid(rows, cols);
 
+const maze = document.getElementById("maze");
+
+// Maybe change to a canvas implementation
+for (let i = 0; i < rows; i++) {
+    const row = document.createElement("div");
+    row.style.width = '100%';
+    row.style.height = `100%`;
+
+    row.classList = `row row_${i}`;
+    for (let j = 0; j < cols; j++) {
+        const cell = document.createElement("div");
+        cell.id = `x${i}-y${j}`;
+        // cell.style.border = "black solid 1px";
+        // cell.style.background = "black";
+        cell.style.width = `${(100 / cols)}%`;
+        cell.style.height = `100%`;
+        cell.classList = "cell";
+        cell.style.background = "white";
+        cell.style.border = "gray dotted 1px";
+               
+
+        row.appendChild(cell);
+    }
+
+    maze.appendChild(row);
+
+}
+
+
 // choose first cell at random
 let randomRowIndex = Math.floor(Math.random() * rows);
 let randomColIndex = Math.floor(Math.random() * cols);
@@ -115,10 +146,10 @@ while (frontierArray.length > 0) {
     let rightNeighbor = null;
     let bottomNeighbor = null;
     let leftNeighbor = null;
-
-    // Need to randomize
     let randomCellIndex = Math.floor(Math.random()*frontierArray.length);
     currentCell = frontierArray[randomCellIndex];
+    let currentCellEl = document.getElementById(`x${currentCell.row}-y${currentCell.col}`);
+    currentCellEl.style.background = "white"
     frontierArray.splice(randomCellIndex, 1);
     currentCell.inFrontier = false;
     currentCell.inMaze = true;
@@ -180,8 +211,6 @@ while (frontierArray.length > 0) {
 
     // shuffle(neighbors);
     let randomNeighborIndex = Math.floor(Math.random()*neighbors.length);
-    console.log(randomNeighborIndex)
-
     // switch statment
     if(neighbors[randomNeighborIndex] == directions.top){
         topNeighbor.walls.bottom = false;
@@ -198,48 +227,7 @@ while (frontierArray.length > 0) {
         leftNeighbor.walls.right = false;
         currentCell.walls.left = false;
     }
-
-
 }
 
-console.log(mazeGrid)
-
-const maze = document.getElementById("maze");
-
-// Maybe change to a canvas implementation
-for (let i = 0; i < rows; i++) {
-    const row = document.createElement("div");
-    row.style.width = '100%';
-    row.style.height = `100%`;
-
-    row.classList = `row row_${i}`;
-    for (let j = 0; j < cols; j++) {
-        const cell = document.createElement("div");
-        cell.id = `x${i}-y${j}`;
-        // cell.style.border = "black solid 1px";
-        // cell.style.background = "black";
-        cell.style.width = `${(100 / cols)}%`;
-        cell.style.height = `100%`;
-        cell.classList = "cell";
-        if (mazeGrid[i][j].walls.top) {
-            cell.style.borderTop = "black solid 1px";
-        }
-        if (mazeGrid[i][j].walls.bottom) {
-            cell.style.borderBottom = "black solid 1px";
-        }
-        if (mazeGrid[i][j].walls.left) {
-            cell.style.borderLeft = "black solid 1px";
-        }
-        if (mazeGrid[i][j].walls.right) {
-            cell.style.borderRight = "black solid 1px";
-        }
-        row.appendChild(cell);
-    }
-
-    maze.appendChild(row);
-
-}
-
-
-
+// SolveMazeWeightedBFS(rows, cols, mazeGrid);
 

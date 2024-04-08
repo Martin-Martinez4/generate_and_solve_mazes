@@ -1,3 +1,4 @@
+import { SolveMazeWeightedBFS } from "./weighted_BFS_solver.js";
 
 class DisjointSet{
     rows;
@@ -185,6 +186,8 @@ for (let row = 0; row < rows; row++) {
     maze.appendChild(rowEl);
 
 }
+
+// SolveMazeWeightedBFS(rows, columns,  mazeGrid);
 
 
 
