@@ -1,8 +1,10 @@
 
-export function SolveMazeWeightedBFS(rows, cols,mazeGrid) {
+export function SolveMazeWeightedBFS(size, mazeGrid) {
+
+    let rows = size;
+    let cols = size;
 
     // Move to a Flood Fill Solve file
-    console.log(mazeGrid)
     let floodFillStack = [];
     mazeGrid[0][0].weight = 0;
     floodFillStack.push(mazeGrid[0][0]);
@@ -39,31 +41,7 @@ export function SolveMazeWeightedBFS(rows, cols,mazeGrid) {
         }
     }
 
-    console.log(mazeGrid)
-
-    for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
-            let cell = document.getElementById(`x${i}-y${j}`);
-
-            // cell.innerText = mazeGrid[i][j].weight
-
-            // cell.style.border = "black solid 1px";
-            // cell.style.background = "black";
-            if (mazeGrid[i][j].walls.top) {
-                cell.style.borderTop = "black solid 1px";
-            }
-            if (mazeGrid[i][j].walls.bottom) {
-                cell.style.borderBottom = "black solid 1px";
-            }
-            if (mazeGrid[i][j].walls.left) {
-                cell.style.borderLeft = "black solid 1px";
-            }
-            if (mazeGrid[i][j].walls.right) {
-                cell.style.borderRight = "black solid 1px";
-            }
-        }
-    }
-
+    // Indicate the path
     let goalCell = mazeGrid[rows - 1][cols - 1];
     let backtrackingStack = [];
     let pathStack = [];
@@ -104,7 +82,7 @@ export function SolveMazeWeightedBFS(rows, cols,mazeGrid) {
 
     }
 
-    console.log(pathStack);
+    // console.log(pathStack);
 
     for (let i = 0; i < pathStack.length; i++) {
         let { row, col } = pathStack[i];

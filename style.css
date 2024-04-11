@@ -5,6 +5,7 @@ html{
 #maze{
     height: 600px;
     width: 600px;
+    margin: auto;
     background: wheat;
     display: flex;
     flex-direction: column;

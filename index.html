@@ -9,7 +9,23 @@
     <div id="maze">
         
     </div>
+    <div>
+
+        <h2>What size should the maze be?</h2>
+        <input id="size" type="number" min="5" max="90">
+    </div>
+    <div>
+
+        <h2>Which algorithm should be used to <u><em>create</em></u> the maze</h2>
+        <button id="prims">Prim's</button> <button id="kruskals">Kruskal's</button> <button  id="backtracking">Recursive Backtracking</button>
+    </div>
+    <div>
+
+        <h2>Which algorithm should be used to <u><em>solve</em></u> the maze</h2>
+        <button id="breadth_first">Breadth First Search</button> <button id="greedy">Greedy Search</button> <button>Depth First Search</button>
+    </div>
+    
 </body>
-<script defer type="module" src="recursive_backtracking.js"></script>
+<script defer type="module" src="script.js"></script>
 <link rel="stylesheet" href="style.css">
 </html>
