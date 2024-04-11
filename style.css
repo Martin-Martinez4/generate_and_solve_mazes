@@ -2,11 +2,15 @@ html{
     background: grey;
 }
 
+body{
+    text-align: center;
+}
+
 #maze{
     height: 600px;
     width: 600px;
     margin: auto;
-    background: wheat;
+    background: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,4 +24,5 @@ html{
 
 .cell{
     box-sizing: border-box;
+    border: dotted rgba(140, 120, 100, .8) 1px;
 }
