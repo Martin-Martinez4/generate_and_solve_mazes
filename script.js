@@ -10,6 +10,8 @@ let mazeGrid;
 
 const mazeEl = document.getElementById("maze");
 const sizeEl = document.getElementById("size");
+const descriptionEl = document.getElementById("maze_description");
+
 sizeEl.value = size;
 
 // Get the desired size of the maze
@@ -35,16 +37,21 @@ primsEl.addEventListener("click", function(){
     mazeEl.innerHTML = "";
     mazeGrid = prims(size);
     drawMaze(size, mazeGrid);
+    descriptionEl.innerText = `This ${size}x${size} maze was generated using Prim's Algorithm.`
 });
 kruskalsEl.addEventListener("click", function(){
     mazeEl.innerHTML = "";
     mazeGrid = kruskals(size);
     drawMaze(size, mazeGrid);
+    descriptionEl.innerText = `This ${size}x${size} maze was generated using Kruskal's Algorithm.`
+
 });
 backtrackingEl.addEventListener("click", function(){
     mazeEl.innerHTML = "";
     mazeGrid = recursive_backtracking(size);
     drawMaze(size, mazeGrid);
+    descriptionEl.innerText = `This ${size}x${size} maze was generated using Recursive Backtracking.`
+
 });
 
 // Maze Solution Algorithms

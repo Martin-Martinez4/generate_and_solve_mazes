@@ -24,5 +24,5 @@ body{
 
 .cell{
     box-sizing: border-box;
-    border: dotted rgba(140, 120, 100, .8) 1px;
+    /* border: dotted rgba(140, 120, 100, .8) 1px; */
 }
