@@ -53,7 +53,7 @@ export function SolveMazeGreedy(size, mazeGrid) {
     while (floodFillStack.getLength() > 0) {
         let cell = floodFillStack.pop();
 
-        let currentCell = document.getElementById(`x${cell.row}-y${cell.col}`);
+        // let currentCell = document.getElementById(`x${cell.row}-y${cell.col}`);
         // currentCell.innerText = cell.depth;
 
 
@@ -141,7 +141,7 @@ export function SolveMazeGreedy(size, mazeGrid) {
     for (let i = 0; i < pathStack.length; i++) {
         let { row, col } = pathStack[i];
         let cell = document.getElementById(`x${row}-y${col}`);
-        cell.style.background = "rgba(200,200,255,.95)";
+        cell.style.background = "rgba(255,200,255,.95)";
 
     }
 }

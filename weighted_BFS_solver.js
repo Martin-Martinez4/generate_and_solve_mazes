@@ -10,6 +10,10 @@ export function SolveMazeWeightedBFS(size, mazeGrid) {
     floodFillStack.push(mazeGrid[0][0]);
     while (floodFillStack.length > 0) {
         let cell = floodFillStack.pop();
+
+        // let currentCell = document.getElementById(`x${cell.row}-y${cell.col}`);
+        // currentCell.innerText = cell.weight;
+        
         if (!cell.walls.top) {
             if (mazeGrid[cell.row - 1][cell.col].weight == undefined) {
 

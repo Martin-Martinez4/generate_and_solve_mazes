@@ -62,3 +62,14 @@ export function makeMazeGridPrims(rows, cols) {
 export function getDistance(x1,x2,y1,y2){
     return Math.sqrt(((x2-x1)**2) + ((y2-y1)**2))
 }
+
+export function resetWeights(mazeGrid){
+
+    for(let i = 0; i < mazeGrid.length; i++){
+        for(let j = 0; j < mazeGrid[i].length; j++){
+            mazeGrid[i][j].weight = undefined;
+            mazeGrid[i][j].depth = undefined;
+        }
+    }
+
+}

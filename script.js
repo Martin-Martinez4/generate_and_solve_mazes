@@ -3,7 +3,7 @@ import { kruskals } from "./kruskals.js";
 import { recursive_backtracking } from "./recursive_backtracking.js";
 import { prims } from "./prims.js";
 import { SolveMazeWeightedBFS } from "./weighted_BFS_solver.js";
-import { getDistance } from "./utils.js";
+import { resetWeights } from "./utils.js";
 import { SolveMazeGreedy } from "./greedy_BFS_Solver.js";
 
 const maxSize = 90;
@@ -63,6 +63,7 @@ const greedyEl = document.getElementById("greedy");
 // Add Eventlisteners
 breadth_firstEl.addEventListener("click", function(){
     if (mazeGrid){
+        resetWeights(mazeGrid);
         SolveMazeWeightedBFS(size, mazeGrid);
     }
     else{
@@ -73,6 +74,7 @@ breadth_firstEl.addEventListener("click", function(){
 
 greedyEl.addEventListener("click", function(){
     if(mazeGrid){
+        resetWeights(mazeGrid);
         SolveMazeGreedy(size, mazeGrid);
     }
     else{
