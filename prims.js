@@ -1,6 +1,4 @@
-import { SolveMazeWeightedBFS } from "./weighted_BFS_solver.js";
 import { shuffle, makeMazeGridPrims } from "./utils.js";
-import { drawMaze } from "./draw.js";
 
 // grid of cells i,j
 // start all at false 

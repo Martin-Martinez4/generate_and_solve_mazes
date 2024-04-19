@@ -3,6 +3,8 @@ import { kruskals } from "./kruskals.js";
 import { recursive_backtracking } from "./recursive_backtracking.js";
 import { prims } from "./prims.js";
 import { SolveMazeWeightedBFS } from "./weighted_BFS_solver.js";
+import { getDistance } from "./utils.js";
+import { SolveMazeGreedy } from "./greedy_BFS_Solver.js";
 
 const maxSize = 90;
 let size = 10;
@@ -67,7 +69,18 @@ breadth_firstEl.addEventListener("click", function(){
         alert("Please Generate a Maze First")
     }
 
-})
+});
+
+greedyEl.addEventListener("click", function(){
+    if(mazeGrid){
+        SolveMazeGreedy(size, mazeGrid);
+    }
+    else{
+        alert("Please Generate a Maze First")
+
+    }
+});
+
 
 
 

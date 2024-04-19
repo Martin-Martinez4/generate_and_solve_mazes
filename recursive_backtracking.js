@@ -2,7 +2,6 @@
 // start all at false 
 // when placed in maze change to true
 import { shuffle, makeMazeGrid } from "./utils.js";
-import { drawMaze } from "./draw.js";
 
 
 export function recursive_backtracking(size) {

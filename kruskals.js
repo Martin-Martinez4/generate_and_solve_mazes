@@ -1,6 +1,4 @@
-import { SolveMazeWeightedBFS } from "./weighted_BFS_solver.js";
 import { shuffle, makeMazeGrid } from "./utils.js";
-import { drawMaze } from "./draw.js";
 
 export function kruskals(size){
 
