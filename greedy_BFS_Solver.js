@@ -1,4 +1,4 @@
-import { getDistance } from "./utils.js";
+import { getEuclideanDistance } from "./utils.js";
 
 class PriorityQueue {
     #queue = [];
@@ -16,6 +16,9 @@ class PriorityQueue {
         while (i > 0) {
             if (this.#queue[i].weight > this.#queue[i - 1].weight) {
                 [this.#queue[i], this.#queue[i - 1]] = [this.#queue[i - 1], this.#queue[i]]
+            }
+            else{
+                break;
             }
             
             i--;
@@ -35,7 +38,8 @@ class PriorityQueue {
     }
 }
 
-export function SolveMazeGreedy(size, mazeGrid) {
+// distancHeuristic is a function that is passed in that determines the weight of the cell
+export function SolveMazeGreedy(size, mazeGrid, distancHeuristic) {
 
     const rows = size;
     const cols = size;
@@ -46,7 +50,7 @@ export function SolveMazeGreedy(size, mazeGrid) {
     
     // Move to a Flood Fill Solve file
     let floodFillStack = new PriorityQueue();
-    mazeGrid[0][0].weight = getDistance(0, target.row, 0, target.col);
+    mazeGrid[0][0].weight = distancHeuristic(0, target.row, 0, target.col);
     mazeGrid[0][0].depth = 0;
 
     floodFillStack.push(mazeGrid[0][0]);
@@ -63,7 +67,7 @@ export function SolveMazeGreedy(size, mazeGrid) {
         if (!cell.walls.top) {
             if (mazeGrid[cell.row - 1][cell.col].weight == undefined) {
 
-                mazeGrid[cell.row - 1][cell.col].weight = getDistance(cell.row-1, target.row, cell.col, target.col);
+                mazeGrid[cell.row - 1][cell.col].weight = distancHeuristic(cell.row-1, target.row, cell.col, target.col);
                 mazeGrid[cell.row - 1][cell.col].depth = cell.depth + 1;
                 floodFillStack.push(mazeGrid[cell.row - 1][cell.col]);
             }
@@ -71,7 +75,7 @@ export function SolveMazeGreedy(size, mazeGrid) {
         if (!cell.walls.bottom) {
             if (mazeGrid[cell.row + 1][cell.col].weight == undefined) {
                 
-                mazeGrid[cell.row + 1][cell.col].weight = getDistance(cell.row + 1, target.row, cell.col, target.col);
+                mazeGrid[cell.row + 1][cell.col].weight = distancHeuristic(cell.row + 1, target.row, cell.col, target.col);
                 mazeGrid[cell.row + 1][cell.col].depth = cell.depth + 1;
                 floodFillStack.push(mazeGrid[cell.row + 1][cell.col]);
             }
@@ -79,7 +83,7 @@ export function SolveMazeGreedy(size, mazeGrid) {
         if (!cell.walls.left) {
             if (mazeGrid[cell.row][cell.col - 1].weight == undefined) {
                 
-                mazeGrid[cell.row][cell.col - 1].weight = getDistance(cell.row, target.row, cell.col-1, target.col);
+                mazeGrid[cell.row][cell.col - 1].weight = distancHeuristic(cell.row, target.row, cell.col-1, target.col);
                 mazeGrid[cell.row][cell.col - 1].depth = cell.depth + 1;
                 floodFillStack.push(mazeGrid[cell.row][cell.col - 1]);
             }
@@ -88,7 +92,7 @@ export function SolveMazeGreedy(size, mazeGrid) {
 
             if (mazeGrid[cell.row][cell.col + 1].weight == undefined) {
 
-                mazeGrid[cell.row][cell.col + 1].weight = getDistance(cell.row, target.row, cell.col+1, target.col);
+                mazeGrid[cell.row][cell.col + 1].weight = distancHeuristic(cell.row, target.row, cell.col+1, target.col);
                 mazeGrid[cell.row][cell.col + 1].depth = cell.depth +1;
                 floodFillStack.push(mazeGrid[cell.row][cell.col + 1]);
             }
@@ -136,7 +140,7 @@ export function SolveMazeGreedy(size, mazeGrid) {
 
     }
 
-    console.log(pathStack);
+    // console.log(pathStack);
 
     for (let i = 0; i < pathStack.length; i++) {
         let { row, col } = pathStack[i];

@@ -2,23 +2,31 @@ import { drawMaze } from "./draw.js";
 import { kruskals } from "./kruskals.js";
 import { recursive_backtracking } from "./recursive_backtracking.js";
 import { prims } from "./prims.js";
-import { SolveMazeWeightedBFS } from "./weighted_BFS_solver.js";
-import { resetWeights } from "./utils.js";
+import { SolveMazeWeightedBFS } from "./BFS_solver.js";
+import { getChebyshevDistance, getDeltaTime, getEuclideanDistance, getManhattanDistance, resetWeights } from "./utils.js";
+
+/*
+    Conclusion: Either the mazes are too small for the heuristics to matter, the execution times are too fast to record accuratley, or my implementation is flawed.  The heuristics seem to not have a consistent effect on the time it takes to solve a maze.
+*/
 import { SolveMazeGreedy } from "./greedy_BFS_Solver.js";
 
-const maxSize = 90;
-let size = 10;
+const maxSize = 200;
+let size = 150;
 let mazeGrid;
+
+// Will bew used to keep track of how long it took to solve the maze
+let delta;
 
 const mazeEl = document.getElementById("maze");
 const sizeEl = document.getElementById("size");
 const descriptionEl = document.getElementById("maze_description");
+const solutionReport = document.getElementById("solution-report")
 
 sizeEl.value = size;
 
 // Get the desired size of the maze
 sizeEl.addEventListener("change", function(e){
-    console.log(e.target.value);
+ 
     if(e.target.value > maxSize){
         e.target.value = maxSize;
         size = maxSize;
@@ -37,19 +45,27 @@ const backtrackingEl = document.getElementById("backtracking");
 // Add event listeners
 primsEl.addEventListener("click", function(){
     mazeEl.innerHTML = "";
+    solutionReport.innerText = ""
+    solutionReport.innerText = ""
     mazeGrid = prims(size);
     drawMaze(size, mazeGrid);
     descriptionEl.innerText = `This ${size}x${size} maze was generated using Prim's Algorithm.`
 });
 kruskalsEl.addEventListener("click", function(){
     mazeEl.innerHTML = "";
+    solutionReport.innerText = ""
     mazeGrid = kruskals(size);
     drawMaze(size, mazeGrid);
     descriptionEl.innerText = `This ${size}x${size} maze was generated using Kruskal's Algorithm.`
 
 });
 backtrackingEl.addEventListener("click", function(){
+    if(sizeEl.value > 90){
+        alert("Recursive backtracking not available. Values greater than 90 cause a stack overflow.")
+        return;
+    }
     mazeEl.innerHTML = "";
+    solutionReport.innerText = ""
     mazeGrid = recursive_backtracking(size);
     drawMaze(size, mazeGrid);
     descriptionEl.innerText = `This ${size}x${size} maze was generated using Recursive Backtracking.`
@@ -58,13 +74,17 @@ backtrackingEl.addEventListener("click", function(){
 
 // Maze Solution Algorithms
 const breadth_firstEl = document.getElementById("breadth_first");
-const greedyEl = document.getElementById("greedy");
+const  euclideanDistanceEl = document.getElementById("euclidean");
+const  manhattanDistanceEl = document.getElementById("manhattan");
+const  chebyshevDistanceEl = document.getElementById("chebyshev");
 
 // Add Eventlisteners
-breadth_firstEl.addEventListener("click", function(){
+breadth_firstEl.addEventListener("click", async function(){
     if (mazeGrid){
         resetWeights(mazeGrid);
-        SolveMazeWeightedBFS(size, mazeGrid);
+        delta = await getDeltaTime(() =>  SolveMazeWeightedBFS(size, mazeGrid));
+
+        solutionReport.innerText = `This mazed was solved in ${delta} ms using Breadth First Search without using a Hueristic. `
     }
     else{
         alert("Please Generate a Maze First")
@@ -72,10 +92,43 @@ breadth_firstEl.addEventListener("click", function(){
 
 });
 
-greedyEl.addEventListener("click", function(){
+euclideanDistanceEl.addEventListener("click", async function(){
     if(mazeGrid){
         resetWeights(mazeGrid);
-        SolveMazeGreedy(size, mazeGrid);
+
+        delta = await getDeltaTime(() => SolveMazeGreedy(size, mazeGrid, getEuclideanDistance));
+        solutionReport.innerText = `This mazed was solved in ${delta} ms using Breadth First Search using Euclidean distance as a Hueristic. `
+
+
+    }
+    else{
+        alert("Please Generate a Maze First")
+
+    }
+});
+
+manhattanDistanceEl.addEventListener("click", async function(){
+    if(mazeGrid){
+        resetWeights(mazeGrid);
+
+        delta = await getDeltaTime(() => SolveMazeGreedy(size, mazeGrid, getManhattanDistance));
+        solutionReport.innerText = `This mazed was solved in ${delta} ms using Breadth First Search using Manhattan distance as a Hueristic. `
+
+
+    }
+    else{
+        alert("Please Generate a Maze First")
+
+    }
+});
+chebyshevDistanceEl.addEventListener("click", async function(){
+    if(mazeGrid){
+        resetWeights(mazeGrid);
+
+        delta = await getDeltaTime(() => SolveMazeGreedy(size, mazeGrid, getChebyshevDistance));
+        solutionReport.innerText = `This mazed was solved in ${delta} ms using Breadth First Search using Chebyshev distance as a Hueristic. `
+
+
     }
     else{
         alert("Please Generate a Maze First")

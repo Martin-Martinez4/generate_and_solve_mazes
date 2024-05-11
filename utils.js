@@ -59,8 +59,14 @@ export function makeMazeGridPrims(rows, cols) {
     return grid;
 }
 
-export function getDistance(x1,x2,y1,y2){
+export function getEuclideanDistance(x1,x2,y1,y2){
     return Math.sqrt(((x2-x1)**2) + ((y2-y1)**2))
+}
+export function getManhattanDistance(x1,x2,y1,y2){
+    return Math.abs(x2-x1) + Math.abs(y2-y1);
+}
+export function getChebyshevDistance(x1,x2,y1,y2){
+    return Math.max(y2 - y1, x2 - x1);
 }
 
 export function resetWeights(mazeGrid){
@@ -72,4 +78,11 @@ export function resetWeights(mazeGrid){
         }
     }
 
+}
+
+export async function getDeltaTime(func){
+    let startTime = performance.now();
+    await func();
+
+    return performance.now() - startTime;
 }

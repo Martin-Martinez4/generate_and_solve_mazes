@@ -86,7 +86,7 @@ export function SolveMazeWeightedBFS(size, mazeGrid) {
 
     }
 
-    console.log(pathStack);
+    // console.log(pathStack);
 
     for (let i = 0; i < pathStack.length; i++) {
         let { row, col } = pathStack[i];

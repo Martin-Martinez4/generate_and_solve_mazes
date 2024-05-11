@@ -10,20 +10,21 @@
         
     </div>
     <p id="maze_description">Create a maze then use the solver to solve it</p>
+    <p id="solution-report"></p>
     <div>
 
-        <h2>What size should the maze be?</h2>
-        <input id="size" type="number" min="5" max="90">
+        <h3>What size should the maze be?</h3>
+        <input id="size" type="number" min="5">
     </div>
     <div>
 
-        <h2>Which algorithm should be used to <u><em>create</em></u> the maze</h2>
+        <h3>Which algorithm should be used to <u><em>create</em></u> the maze</h3>
         <button id="prims">Prim's</button> <button id="kruskals">Kruskal's</button> <button  id="backtracking">Recursive Backtracking</button>
     </div>
     <div>
 
-        <h2>Which algorithm should be used to <u><em>solve</em></u> the maze</h2>
-        <button id="breadth_first">Breadth First Search</button> <button id="greedy">Greedy Search</button> <button>Depth First Search</button>
+        <h3>Which algorithm should be used to <u><em>solve</em></u> the maze</h3>
+        <button id="breadth_first">Breadth First Search</button> <button id="euclidean">Greedy Search (Euclidean distance Hueristic)</button> <button id="manhattan">Greedy Search (Manhattan distance Hueristic)</button><button id="chebyshev">Greedy Search (Chebyshev distance Hueristic)</button>
     </div>
     
 </body>
