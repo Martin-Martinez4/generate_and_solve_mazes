@@ -11,7 +11,7 @@ import { getChebyshevDistance, getDeltaTime, getEuclideanDistance, getManhattanD
 import { SolveMazeGreedy } from "./greedy_BFS_Solver.js";
 
 const maxSize = 200;
-let size = 150;
+let size = 20;
 let mazeGrid;
 
 // Will bew used to keep track of how long it took to solve the maze
@@ -96,7 +96,7 @@ euclideanDistanceEl.addEventListener("click", async function(){
     if(mazeGrid){
         resetWeights(mazeGrid);
 
-        delta = await getDeltaTime(() => SolveMazeGreedy(size, mazeGrid, getEuclideanDistance));
+        delta = await getDeltaTime(() => SolveMazeGreedy(size, mazeGrid, getEuclideanDistance, "rgb(220, 180, 25)"));
         solutionReport.innerText = `This mazed was solved in ${delta} ms using Breadth First Search using Euclidean distance as a Hueristic. `
 
 
@@ -111,7 +111,7 @@ manhattanDistanceEl.addEventListener("click", async function(){
     if(mazeGrid){
         resetWeights(mazeGrid);
 
-        delta = await getDeltaTime(() => SolveMazeGreedy(size, mazeGrid, getManhattanDistance));
+        delta = await getDeltaTime(() => SolveMazeGreedy(size, mazeGrid, getManhattanDistance, "rgb(25, 125, 25)"));
         solutionReport.innerText = `This mazed was solved in ${delta} ms using Breadth First Search using Manhattan distance as a Hueristic. `
 
 
@@ -125,7 +125,7 @@ chebyshevDistanceEl.addEventListener("click", async function(){
     if(mazeGrid){
         resetWeights(mazeGrid);
 
-        delta = await getDeltaTime(() => SolveMazeGreedy(size, mazeGrid, getChebyshevDistance));
+        delta = await getDeltaTime(() => SolveMazeGreedy(size, mazeGrid, getChebyshevDistance, "rgb(200, 100, 100)"));
         solutionReport.innerText = `This mazed was solved in ${delta} ms using Breadth First Search using Chebyshev distance as a Hueristic. `
 
 

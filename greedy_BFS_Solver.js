@@ -39,7 +39,7 @@ class PriorityQueue {
 }
 
 // distancHeuristic is a function that is passed in that determines the weight of the cell
-export function SolveMazeGreedy(size, mazeGrid, distancHeuristic) {
+export function SolveMazeGreedy(size, mazeGrid, distancHeuristic, color="rgb(170,170,200)") {
 
     const rows = size;
     const cols = size;
@@ -145,7 +145,7 @@ export function SolveMazeGreedy(size, mazeGrid, distancHeuristic) {
     for (let i = 0; i < pathStack.length; i++) {
         let { row, col } = pathStack[i];
         let cell = document.getElementById(`x${row}-y${col}`);
-        cell.style.background = "rgba(255,200,255,.95)";
+        cell.style.background = color;
 
     }
 }

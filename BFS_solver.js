@@ -1,5 +1,5 @@
 
-export function SolveMazeWeightedBFS(size, mazeGrid) {
+export function SolveMazeWeightedBFS(size, mazeGrid, color="rgb(170,170,200)") {
 
     let rows = size;
     let cols = size;
@@ -91,7 +91,7 @@ export function SolveMazeWeightedBFS(size, mazeGrid) {
     for (let i = 0; i < pathStack.length; i++) {
         let { row, col } = pathStack[i];
         let cell = document.getElementById(`x${row}-y${col}`);
-        cell.style.background = "rgba(200,200,255,.95)";
+        cell.style.background = color;
 
     }
 }
