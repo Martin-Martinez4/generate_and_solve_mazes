@@ -141,7 +141,7 @@ export function prims(size) {
             neighbors.push(directions.left)
         }
 
-        // shuffle(neighbors);
+        shuffle(neighbors);
         let randomNeighborIndex = Math.floor(Math.random() * neighbors.length);
         // switch statment
         if (neighbors[randomNeighborIndex] == directions.top) {

@@ -59,6 +59,7 @@ export function makeMazeGridPrims(rows, cols) {
     return grid;
 }
 
+// Distance heuristics
 export function getEuclideanDistance(x1,x2,y1,y2){
     return Math.sqrt(((x2-x1)**2) + ((y2-y1)**2))
 }
@@ -69,6 +70,7 @@ export function getChebyshevDistance(x1,x2,y1,y2){
     return Math.max(y2 - y1, x2 - x1);
 }
 
+// Used to allow the same maze be solved multiple times.  
 export function resetWeights(mazeGrid){
 
     for(let i = 0; i < mazeGrid.length; i++){
@@ -80,6 +82,7 @@ export function resetWeights(mazeGrid){
 
 }
 
+// To measure how long the solve takes to solve the maze.  
 export async function getDeltaTime(func){
     let startTime = performance.now();
     await func();

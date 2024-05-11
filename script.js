@@ -82,7 +82,7 @@ const  chebyshevDistanceEl = document.getElementById("chebyshev");
 breadth_firstEl.addEventListener("click", async function(){
     if (mazeGrid){
         resetWeights(mazeGrid);
-        delta = await getDeltaTime(() =>  SolveMazeWeightedBFS(size, mazeGrid));
+        delta = await getDeltaTime(() =>  SolveMazeWeightedBFS(size, mazeGrid, "rgb(25, 80, 100)"));
 
         solutionReport.innerText = `This mazed was solved in ${delta} ms using Breadth First Search without using a Hueristic. `
     }
